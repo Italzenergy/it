@@ -1,0 +1,265 @@
+/* Navbar default */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #000000, #353535);
+  padding: 14px 32px;
+  margin: 20px auto;
+  width: 95%;
+  max-width: 1200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  position: relative;
+  z-index: 10;
+  transition: transform 0.4s ease;
+}
+
+.navbar-left img {
+  height: 45px; /* Mantiene el tamaño original del contenedor */
+  transform: scale(2.5); /* Escala visualmente la imagen */
+  transform-origin: left center; }
+
+.navbar-center {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-center li a {
+  text-decoration: none;
+  color: #fff300;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navbar-center li a:hover {
+  color: #ffffff;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.btn-signin,
+.btn-signup {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  background: none;
+  color: #fff300;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  padding: 6px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-signin::before,
+.btn-signup::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #fff300, #ffd700, #fff300, #ffd700);
+  animation: rotate 4s linear infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 6px;
+}
+
+.btn-signin:hover::before,
+.btn-signup:hover::before {
+  opacity: 1;
+}
+
+.btn-signin:hover,
+.btn-signup:hover {
+  color: #000;
+  background-color: #fff300;
+  box-shadow: 0 6px 12px rgba(255, 243, 0, 0.7);
+  transform: scale(1.05);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Control de visibilidad */
+.navbar--hidden {
+  transform: translateY(-120%);
+  transition: transform 0.4s ease;
+}
+
+.navbar--visible {
+  transform: translateY(0);
+  transition: transform 0.4s ease;
+}
+
+/* Navbar fixed */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 95%;
+  max-width: 1200px;
+  z-index: 100;
+}
+
+/* Media Queries */
+
+/* Para pantallas medianas (tabletas) */
+@media (max-width: 768px) {
+  .navbar {
+    width: 90%; /* Más pequeño que 95% */
+    padding: 10px 20px;
+  }
+  .navbar-center {
+    display: none; /* Ocultar el menú */
+  }
+
+  .navbar-right {
+    display: flex;
+    gap: 8px;
+  }
+
+  .navbar-left {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+
+/* Estilo del hamburger menu */
+.hamburger-menu {
+  display: block;
+  cursor: pointer;
+  margin-top: 5px;  /* Espacio superior */
+  margin-left: 20px; /* Espacio lateral izquierdo */
+  margin-right: 20px; /* Espacio lateral derecho */
+  transition: transform 0.3s ease-in-out; /* Transición suave */
+   position: relative;
+  overflow: hidden;
+  z-index: 0;
+  background: none;
+  color: #fff300;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  padding: 6px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hamburger-menu span {
+  background-color: #fff300;
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px 0;
+  transition: all 0.3s ease-in-out; /* Animación de transformación */
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Transición elástica */
+  
+}
+
+/* Cuando el menú está abierto (transformación de la hamburguesa en "X") */
+.navbar.open .hamburger-menu span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg); /* Movimiento y rotación */
+}
+
+.navbar.open .hamburger-menu span:nth-child(2) {
+  opacity: 0; /* Desaparece la línea central */
+}
+
+.navbar.open .hamburger-menu span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg); /* Movimiento y rotación */
+}
+
+/* Animación del menú de navegación cuando se abre */
+.navbar.open .navbar-center {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: absolute;
+  top: 80px; /* Ajusta la posición según sea necesario */
+  left: 0;
+  right: 0;
+  background-color: #353535;
+  padding: 20px;
+  opacity: 1; /* Hace el menú visible */
+  transform: translateY(0); /* El menú aparece desde abajo */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Animación de entrada */
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+
+}
+
+/* Cuando el menú está cerrado */
+.navbar .navbar-center {
+  display: none; /* Oculta el menú */
+  opacity: 0; /* Desaparece el menú */
+  transform: translateY(-100%); /* El menú se posiciona fuera de la pantalla */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Animación de salida */
+  display: none;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .navbar-left img {
+    height: 30px;
+  }
+
+  .navbar-center li a {
+    font-size: 14px;
+  }
+
+  .navbar-right .btn {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  /* Aumenta el margen lateral en el menú hamburger en pantallas móviles */
+  .hamburger-menu {
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+}
+}
